@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { BsSearch } from 'react-icons/bs';
 import { fetchCountries, filterContinent } from '../redux/countrySlice/countrySlice';
 import Navbar from './navbar';
 import world from '../assets/image.jpg';
@@ -7,7 +8,7 @@ import Country from './countryhome';
 import './components.css';
 
 const Home = () => {
-  const [search] = useState('');
+  const [search, setSearch] = useState('');
   const dispatch = useDispatch();
   const countriesData = useSelector((state) => state);
   const { countries, continent } = countriesData;
@@ -35,11 +36,20 @@ const Home = () => {
     dispatch(filterContinent(e.target.value));
   };
 
+  const inputChangeHandler = (e) => {
+    const input = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+    setSearch(input);
+  };
+
   return (
     <>
       <Navbar data="Countries" year={2023} />
       <div><img id="world" src={world} alt="world map" /></div>
       <div id="filterContainer">
+        <form id="form">
+          <input id="searchInput" onChange={inputChangeHandler} value={search} type="search" placeholder="Eg Kenya, England" />
+          <BsSearch />
+        </form>
         <label htmlFor="cars" id="selectFilter">
           Continent
           <select onChange={selectChangeHandler} value={continent} name="cars" id="countriesFilter">
