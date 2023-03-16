@@ -9,30 +9,28 @@ const initialState = {
   country: [],
 };
 
-const fetchCountries = createAsyncThunk('country/fetchCountry', () => axios.get('https://restcountries.com/v2/all')
-  .then((res) => res.data.map((country) => (
-    {
-      countryName: country.name,
-      region: country.region,
-      population: country.population,
-      flag: country.flags,
-    }
-  ))));
+const fetchCountries = createAsyncThunk('country/fetchCountry', async () => {
+  const response = await axios.get('https://restcountries.com/v2/all');
+  const countries = response.data.map((country) => ({
+    countryName: country.name,
+    region: country.region,
+    population: country.population,
+    flag: country.flags,
+  }));
+  return countries;
+});
 
-const fetchCountry = createAsyncThunk('country/fetchSpecificCountry', (country) => (
-  axios.get(`https://restcountries.com/v2/name/${country}`)
-    .then((res) => res.data.map((country) => (
-      {
-        countryName: country.name,
-        capital: country.capital,
-        region: country.region,
-        population: country.population,
-        area: country.area,
-        timezones: country.timezones,
-        flag: country.flags,
-        currencies: country.currencies,
-      }
-    )))));
+const fetchCountry = createAsyncThunk('country/fetchSpecificCountry', (country) => axios.get(`https://restcountries.com/v2/name/${country}`)
+  .then((response) => response.data.map((countryData) => ({
+    countryName: countryData.name,
+    capital: countryData.capital,
+    region: countryData.region,
+    population: countryData.population,
+    area: countryData.area,
+    timezones: countryData.timezones,
+    flag: countryData.flags,
+    currencies: countryData.currencies,
+  }))));
 
 const countrySlice = createSlice({
   name: 'countries',
