@@ -1,0 +1,71 @@
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCountries, filterContinent } from '../redux/countrySlice/countrySlice';
+import Navbar from './navbar';
+import world from '../assets/image.jpg';
+import Country from './countryhome';
+import './components.css';
+
+const Home = () => {
+  const [search] = useState('');
+  const dispatch = useDispatch();
+  const countriesData = useSelector((state) => state);
+  const { countries, continent } = countriesData;
+  useEffect(() => {
+    if (countries.length === 0) {
+      dispatch(fetchCountries());
+    }
+  }, [dispatch, countries.length]);
+
+  const displayCountries = countries.filter((country) => country.region === continent)
+    .filter((item) => (
+      search === '' ? item
+        : item.countryName.includes(search)
+    ))
+    .map((country) => (
+      <Country
+        key={country.countryName}
+        name={country.countryName}
+        population={country.population}
+        flag={country.flag.svg}
+      />
+    ));
+
+  const selectChangeHandler = (e) => {
+    dispatch(filterContinent(e.target.value));
+  };
+
+  return (
+    <>
+      <Navbar data="Countries" year={2023} />
+      <div><img id="world" src={world} alt="world map" /></div>
+      <div id="filterContainer">
+        <label htmlFor="cars" id="selectFilter">
+          Continent
+          <select onChange={selectChangeHandler} value={continent} name="cars" id="countriesFilter">
+            <option value="Africa"> Africa</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+          </select>
+        </label>
+      </div>
+      <p id="heading">Stats by population</p>
+      <div>
+        {countriesData.loading && <h1>Loading...</h1>}
+        {!countriesData.loading && countriesData.error ? (
+          <div>
+            Error:
+            {countriesData.error}
+          </div>
+        ) : null}
+        {!countriesData.loading && countriesData.countries.length ? (
+          <div id="countriesContainer">{displayCountries}</div>
+        ) : null}
+      </div>
+    </>
+  );
+};
+
+export default Home;
