@@ -1,0 +1,156 @@
+.HomeFlag {
+  width: 30%;
+  height: 20%;
+}
+
+.detailContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+  font-weight: bold;
+  font-size: 15px;
+  width: 50%;
+}
+
+#detailsFlag {
+  display: flex;
+  justify-content: center;
+}
+
+#detailscolor {
+  color: white;
+}
+
+#world {
+  width: 100%;
+  min-height: 200px;
+  object-fit: cover;
+}
+
+#filterContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 0;
+  color: #fff;
+}
+
+#form {
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 1rem;
+  padding: 0 0.5rem;
+}
+
+#heading {
+  text-align: center;
+  padding: 0.5rem 0;
+  color: white;
+}
+
+#countriesContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#searchInput {
+  border: none;
+  background-color: #02811e;
+  color: #fff;
+  height: 1.5rem;
+  border-radius: 0.5rem;
+  width: 140px;
+}
+
+::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+input:focus {
+  outline: none;
+}
+
+#countriesFilter {
+  border-radius: 1rem;
+  border-color: #fff;
+  color: #fff;
+  background-color: #02811e;
+  margin-left: 0.2rem;
+  font-size: 18px;
+}
+
+h1 {
+  color: white;
+}
+
+.flagSize {
+  width: 7rem;
+  height: 5rem;
+}
+
+.homeFlag {
+  display: flex;
+  justify-content: space-around;
+}
+
+.countryName {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.countryPopulation {
+  display: flex;
+}
+
+.countryLink {
+  text-decoration: none;
+  color: white;
+}
+
+.borders {
+  border: 1px solid white;
+  padding: 10px;
+}
+
+.colon {
+  margin: 0 0.2rem;
+}
+
+#head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  color: white;
+}
+
+#settings {
+  width: 4rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+#back {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: white;
+}
